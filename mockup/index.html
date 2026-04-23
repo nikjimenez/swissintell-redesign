@@ -196,10 +196,13 @@
     .logo:hover { opacity: .85; }
     .logo-svg {
       height: 36px;
-      width: auto;
+      width: 158px;           /* explicit width — viewBox ratio 632:144 ≈ 4.39 → 36 × 4.39 */
       display: block;
     }
-    .logo-footer .logo-svg { height: 32px; }
+    .logo-footer .logo-svg {
+      height: 32px;
+      width: 140px;           /* 32 × 4.39 */
+    }
     .nav-links {
       display: flex;
       gap: 1.5rem;
