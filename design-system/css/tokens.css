@@ -1,0 +1,180 @@
+/* ============================================================
+   SWISSINTELL · DESIGN TOKENS
+   Version 1.0 · April 2026
+   ----------------------------------------------------------
+   Foundation-level variables. Import this file first.
+   All components consume these tokens — never hard-code values.
+   ============================================================ */
+
+:root {
+
+  /* ------------------------------------------------------------
+     1. COLOR
+     Brand first, then surfaces, then text, then semantic
+     ------------------------------------------------------------ */
+
+  /* 1.1 Brand */
+  --color-brand-red:          #E01A27;
+  --color-brand-red-hover:    #B8101C;
+  --color-brand-red-glow:     rgba(224, 26, 39, 0.45);
+  --color-brand-red-soft:     rgba(224, 26, 39, 0.10);
+  --color-brand-red-border:   rgba(224, 26, 39, 0.25);
+
+  /* 1.2 Surfaces — Dark (institutional sections) */
+  --color-surface-navy:       #0D1B35;   /* primary dark */
+  --color-surface-navy-2:     #162040;   /* elevated dark (topbar, cards on dark) */
+  --color-surface-navy-3:     #1A2744;   /* hover/active on dark */
+  --color-surface-card-dark:  #131F38;   /* resource cards */
+  --color-border-dark:        #222F4A;
+
+  /* 1.3 Surfaces — Light (editorial sections) */
+  --color-surface-bg:         #F8F9FB;   /* page background */
+  --color-surface-card:       #FFFFFF;   /* cards & panels */
+  --color-border-light:       #DDE1E9;
+
+  /* 1.4 Text */
+  --color-text-primary:       #111827;   /* headlines, body on light */
+  --color-text-secondary:     #6B7280;   /* supporting text on light */
+  --color-text-muted:         #8A96AA;   /* low-emphasis on dark */
+  --color-text-white:         #FFFFFF;
+  --color-text-white-80:      rgba(255, 255, 255, 0.80);
+  --color-text-white-65:      rgba(255, 255, 255, 0.65);
+
+  /* 1.5 Tag colors (systematic) */
+  --tag-cyber-bg:             rgba(224, 26, 39, 0.10);
+  --tag-cyber-border:         rgba(224, 26, 39, 0.30);
+  --tag-cyber-text:           #B8101C;
+
+  --tag-geo-bg:               rgba(70, 130, 200, 0.10);
+  --tag-geo-border:           rgba(70, 130, 200, 0.30);
+  --tag-geo-text:             #3D6FA8;
+
+  --tag-econ-bg:              rgba(180, 140, 20, 0.10);
+  --tag-econ-border:          rgba(180, 140, 20, 0.30);
+  --tag-econ-text:            #A88A1E;
+
+  --tag-tech-bg:              rgba(120, 80, 200, 0.10);
+  --tag-tech-border:          rgba(120, 80, 200, 0.30);
+  --tag-tech-text:            #7A5FB3;
+
+
+  /* ------------------------------------------------------------
+     2. TYPOGRAPHY
+     Calibri is the brand typeface. System fallbacks ensure
+     the site renders cleanly even if the font fails to load.
+     ------------------------------------------------------------ */
+
+  --font-family-base:         'Calibri', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Type scale (modular, based on 16px root) */
+  --font-size-xs:             0.75rem;    /* 12px — labels, captions */
+  --font-size-sm:             0.875rem;   /* 14px — UI, meta */
+  --font-size-base:           1rem;       /* 16px — body */
+  --font-size-lg:             1.125rem;   /* 18px — lead paragraphs */
+  --font-size-xl:             1.375rem;   /* 22px — small headings */
+  --font-size-2xl:            1.75rem;    /* 28px — section subheads */
+  --font-size-3xl:            2.5rem;     /* 40px — section titles (h2) */
+  --font-size-4xl:            3.5rem;     /* 56px — hero (h1) */
+
+  --font-weight-regular:      400;
+  --font-weight-medium:       500;
+  --font-weight-semibold:     600;
+  --font-weight-bold:         700;
+  --font-weight-extrabold:    800;
+
+  --line-height-tight:        1.1;        /* display headings */
+  --line-height-snug:         1.3;        /* small headings */
+  --line-height-normal:       1.6;        /* body */
+  --line-height-relaxed:      1.7;        /* long-form */
+
+  --letter-spacing-tight:     -0.03em;    /* large display */
+  --letter-spacing-normal:    0;
+  --letter-spacing-wide:      0.08em;     /* uppercase meta */
+  --letter-spacing-wider:     0.14em;     /* brand labels */
+
+
+  /* ------------------------------------------------------------
+     3. SPACING
+     4px base scale. Name = pixel value.
+     ------------------------------------------------------------ */
+
+  --space-1:                  0.25rem;    /*  4px */
+  --space-2:                  0.5rem;     /*  8px */
+  --space-3:                  0.75rem;    /* 12px */
+  --space-4:                  1rem;       /* 16px */
+  --space-5:                  1.25rem;    /* 20px */
+  --space-6:                  1.5rem;     /* 24px */
+  --space-8:                  2rem;       /* 32px */
+  --space-10:                 2.5rem;     /* 40px */
+  --space-12:                 3rem;       /* 48px */
+  --space-16:                 4rem;       /* 64px */
+  --space-20:                 5rem;       /* 80px — section vertical rhythm */
+  --space-24:                 6rem;       /* 96px */
+
+
+  /* ------------------------------------------------------------
+     4. LAYOUT
+     ------------------------------------------------------------ */
+
+  --max-width:                1200px;     /* primary container */
+  --container-padding:        2rem;
+
+
+  /* ------------------------------------------------------------
+     5. BORDERS & RADIUS
+     ------------------------------------------------------------ */
+
+  --radius-sm:                3px;        /* tags, badges */
+  --radius-base:              6px;        /* buttons, inputs, cards */
+  --radius-lg:                10px;       /* elevated panels */
+  --radius-pill:              100px;      /* pill-shaped badges */
+
+  --border-width:             1px;
+
+
+  /* ------------------------------------------------------------
+     6. ELEVATION (shadows)
+     Stratified. Use higher levels sparingly.
+     ------------------------------------------------------------ */
+
+  --shadow-xs:                0 1px 3px rgba(13, 27, 53, 0.04);
+  --shadow-sm:                0 2px 8px rgba(13, 27, 53, 0.08);
+  --shadow-md:                0 4px 16px rgba(13, 27, 53, 0.10);
+  --shadow-lg:                0 12px 28px rgba(13, 27, 53, 0.12);
+  --shadow-xl:                0 8px 32px rgba(0, 0, 0, 0.30);
+
+  /* Red glow — for primary CTAs */
+  --shadow-red-sm:            0 2px 8px rgba(224, 26, 39, 0.25);
+  --shadow-red-lg:            0 6px 18px rgba(224, 26, 39, 0.40);
+
+
+  /* ------------------------------------------------------------
+     7. MOTION
+     Consistent durations and easings across the system.
+     ------------------------------------------------------------ */
+
+  --duration-fast:            150ms;
+  --duration-base:            200ms;
+  --duration-slow:            250ms;
+
+  --ease-out:                 cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out:              cubic-bezier(0.4, 0, 0.2, 1);
+
+
+  /* ------------------------------------------------------------
+     8. BREAKPOINTS (reference only — used in media queries)
+     ------------------------------------------------------------ */
+
+  /* --breakpoint-md:  768px   — tablet */
+  /* --breakpoint-lg:  960px   — desktop (current mockup switch) */
+  /* --breakpoint-xl:  1200px  — max container */
+
+
+  /* ------------------------------------------------------------
+     9. Z-INDEX
+     ------------------------------------------------------------ */
+
+  --z-nav:                    100;
+  --z-modal:                  1000;
+  --z-toast:                  9999;
+}

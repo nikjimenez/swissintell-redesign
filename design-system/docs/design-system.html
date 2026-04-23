@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swissintell · Design System v1.0</title>
+<link rel="preconnect" href="https://fonts.cdnfonts.com">
+<link href="https://fonts.cdnfonts.com/css/calibri" rel="stylesheet">
+
+<style>
+  /* ========== DS TOKENS (inline so PDF export is portable) ========== */
+  :root {
+    --color-brand-red: #E01A27;
+    --color-brand-red-hover: #B8101C;
+    --color-brand-red-soft: rgba(224,26,39,.10);
+    --color-brand-red-border: rgba(224,26,39,.25);
+    --color-surface-navy: #0D1B35;
+    --color-surface-navy-2: #162040;
+    --color-surface-card-dark: #131F38;
+    --color-border-dark: #222F4A;
+    --color-surface-bg: #F8F9FB;
+    --color-surface-card: #FFFFFF;
+    --color-border-light: #DDE1E9;
+    --color-text-primary: #111827;
+    --color-text-secondary: #6B7280;
+    --color-text-muted: #8A96AA;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Calibri', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--color-surface-bg);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ========== DOCUMENT LAYOUT ========== */
+  .ds-doc {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Cover page */
+  .ds-cover {
+    background: linear-gradient(135deg, #0D1B35 0%, #162040 50%, #1A0A0A 100%);
+    color: #fff;
+    padding: 4rem 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .ds-cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%);
+  }
+  .ds-cover-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .ds-cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .ds-cover-main {
+    margin-top: 6rem;
+  }
+  .ds-cover-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 6px 14px;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+  .ds-cover h1 {
+    font-size: 4.5rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+  .ds-cover h1 .accent { color: var(--color-brand-red); }
+  .ds-cover-subtitle {
+    font-size: 1.25rem;
+    font-weight: 300;
+    opacity: 0.9;
+    max-width: 700px;
+    line-height: 1.5;
+  }
+  .ds-cover-meta {
+    margin-top: 4rem;
+    display: flex;
+    gap: 5rem;
+  }
+  .ds-cover-meta-item .key {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 4px;
+  }
+  .ds-cover-meta-item .val {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .ds-cover-footer {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.65;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 1rem;
+  }
+
+  /* ========== SECTIONS ========== */
+  .ds-section {
+    padding: 4rem 0 2rem;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .ds-section:last-of-type { border-bottom: none; }
+
+  .ds-section-head { margin-bottom: 2.5rem; }
+  .ds-section-num {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-brand-red);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .ds-section h2 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+  .ds-section-lead {
+    font-size: 1.0625rem;
+    color: var(--color-text-secondary);
+    max-width: 640px;
+    line-height: 1.6;
+  }
+
+  h3.ds-h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 2rem 0 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border-light);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  h3.ds-h3::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--color-brand-red);
+    border-radius: 50%;
+  }
+  h3.ds-h3:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+  h4.ds-h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.75rem;
+  }
+
+  /* ========== COLOR TOKENS ========== */
+  .ds-color-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .ds-swatch {
+    border: 1px solid var(--color-border-light);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .ds-swatch-color {
+    height: 100px;
+    position: relative;
+  }
+  .ds-swatch-meta {
+    padding: 0.85rem 1rem;
+    border-top: 1px solid var(--color-border-light);
+  }
+  .ds-swatch-name {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.2rem;
+  }
+  .ds-swatch-token {
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+    word-break: break-all;
+  }
+  .ds-swatch-hex {
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-top: 0.2rem;
+  }
+
+  /* ========== TYPE SCALE ========== */
+  .ds-type-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 100px;
+    align-items: baseline;
+    gap: 2rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+  .ds-type-row:last-child { border-bottom: none; }
+  .ds-type-token {
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+  }
+  .ds-type-sample {
+    color: var(--color-text-primary);
+    line-height: 1.15;
+  }
+  .ds-type-size {
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-align: right;
+  }
+
+  /* ========== SPACING ========== */
+  .ds-space-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .ds-space-item {
+    background: #fff;
+    border: 1px solid var(--color-border-light);
+    border-radius: 6px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .ds-space-bar {
+    background: var(--color-brand-red-soft);
+    border: 1px solid var(--color-brand-red-border);
+    height: 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .ds-space-label {
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    font-size: 0.75rem;
+    color: var(--color-text-primary);
+  }
+  .ds-space-px {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-left: auto;
+  }
+
+  /* ========== EXAMPLE WRAPPERS ========== */
+  .ds-example {
+    background: #fff;
+    border: 1px solid var(--color-border-light);
+    border-radius: 6px;
+    padding: 2rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  .ds-example-dark {
+    background: var(--color-surface-navy);
+    border-color: var(--color-border-dark);
+  }
+  .ds-example-caption {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    margin-bottom: 2rem;
+  }
+
+  /* ========== BUTTONS (demo) ========== */
+  .demo-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--color-brand-red);
+    color: #fff;
+    padding: 0.75rem 1.75rem;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border: none;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(224,26,39,.25);
+  }
+  .demo-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    background: transparent;
+    padding: 0.65rem 1.5rem;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .demo-btn-ghost-light {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--color-border-light);
+    color: var(--color-text-primary);
+    background: transparent;
+    padding: 0.65rem 1.5rem;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  /* ========== TAGS (demo) ========== */
+  .demo-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.7rem;
+    background: rgba(224,26,39,.10);
+    border: 1px solid rgba(224,26,39,.30);
+    color: var(--color-brand-red-hover);
+    border-radius: 3px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .demo-tag.geo { background: rgba(70,130,200,.10); border-color: rgba(70,130,200,.30); color: #3D6FA8; }
+  .demo-tag.econ { background: rgba(180,140,20,.10); border-color: rgba(180,140,20,.30); color: #A88A1E; }
+  .demo-tag.tech { background: rgba(120,80,200,.10); border-color: rgba(120,80,200,.30); color: #7A5FB3; }
+  .demo-pill {
+    background: var(--color-brand-red);
+    color: #fff;
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* ========== PRINCIPLES ========== */
+  .ds-principles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .ds-principle {
+    background: #fff;
+    border: 1px solid var(--color-border-light);
+    border-radius: 6px;
+    padding: 1.5rem;
+    border-left: 3px solid var(--color-brand-red);
+  }
+  .ds-principle-num {
+    font-size: 0.7rem;
+    color: var(--color-brand-red);
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .ds-principle h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.5rem;
+  }
+  .ds-principle p {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  /* ========== DO / DON'T ========== */
+  .ds-do-dont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .ds-do, .ds-dont {
+    padding: 1.25rem;
+    border-radius: 6px;
+    border-left: 3px solid;
+  }
+  .ds-do {
+    background: #E8F5E9;
+    border-left-color: #2E7D32;
+  }
+  .ds-dont {
+    background: #FFEBEE;
+    border-left-color: #C62828;
+  }
+  .ds-do-label, .ds-dont-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .ds-do-label { color: #2E7D32; }
+  .ds-dont-label { color: #C62828; }
+  .ds-do p, .ds-dont p {
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
+    line-height: 1.5;
+  }
+
+  /* ========== MOTION DEMO ========== */
+  .ds-motion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .ds-motion-card {
+    background: #fff;
+    border: 1px solid var(--color-border-light);
+    border-radius: 6px;
+    padding: 1.25rem;
+  }
+  .ds-motion-name {
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    font-size: 0.8rem;
+    color: var(--color-text-primary);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  .ds-motion-val {
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+  .ds-motion-usage {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+
+  /* ========== FOOTER ========== */
+  .ds-footer {
+    background: var(--color-surface-navy);
+    color: #fff;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .ds-footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .ds-footer h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+  .ds-footer p {
+    color: rgba(255,255,255,.65);
+    font-size: 0.9rem;
+  }
+
+  /* Subtle shadow demo card */
+  .ds-shadow-demo {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+  }
+  .ds-shadow-card {
+    background: #fff;
+    border-radius: 6px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    border: 1px solid transparent;
+  }
+  .ds-shadow-card.xs { box-shadow: 0 1px 3px rgba(13,27,53,.04); }
+  .ds-shadow-card.sm { box-shadow: 0 2px 8px rgba(13,27,53,.08); }
+  .ds-shadow-card.md { box-shadow: 0 4px 16px rgba(13,27,53,.10); }
+  .ds-shadow-card.lg { box-shadow: 0 12px 28px rgba(13,27,53,.12); }
+  .ds-shadow-card.red { box-shadow: 0 6px 18px rgba(224,26,39,.4); }
+  .ds-shadow-label {
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    font-size: 0.75rem;
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  /* Page break helpers for PDF */
+  .page-break { page-break-after: always; }
+
+  @media print {
+    .ds-section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     COVER PAGE
+     ============================================================ -->
+<div class="ds-cover">
+  <div class="ds-cover-inner">
+    <div class="ds-cover-top">
+      <span>Design System · v1.0</span>
+      <span>Internal / Client Ready</span>
+    </div>
+
+    <div class="ds-cover-main">
+      <span class="ds-cover-label">Design System</span>
+      <h1>Swissintell<span class="accent">.</span></h1>
+      <p class="ds-cover-subtitle">Foundational tokens, components and rules for the Swissintell website. Built on WordPress. Based on the homepage redesign mockup.</p>
+
+      <div class="ds-cover-meta">
+        <div class="ds-cover-meta-item">
+          <div class="key">Version</div>
+          <div class="val">1.0</div>
+        </div>
+        <div class="ds-cover-meta-item">
+          <div class="key">Scope</div>
+          <div class="val">Homepage foundations</div>
+        </div>
+        <div class="ds-cover-meta-item">
+          <div class="key">Date</div>
+          <div class="val">April 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-cover-footer">
+      Prepared by Nico · For Swissintell Association
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<div class="ds-doc">
+
+  <!-- ============== 01. PRINCIPLES ============== -->
+  <section class="ds-section">
+    <div class="ds-section-head">
+      <div class="ds-section-num">01 · Principles</div>
+      <h2>How this system thinks</h2>
+      <p class="ds-section-lead">Four principles guide every decision in the Swissintell design system. They exist so the site reads as Swiss, institutional and credible — without being cold or bureaucratic.</p>
+    </div>
+
+    <div class="ds-principles">
+      <div class="ds-principle">
+        <div class="ds-principle-num">Principle 01</div>
+        <h4>Institutional, not corporate</h4>
+        <p>Swissintell is a nonprofit with 18+ years of history. The visual tone is confident and serious, not trying to look like a startup or a bank. Generous whitespace, restrained color, strong typography.</p>
+      </div>
+
+      <div class="ds-principle">
+        <div class="ds-principle-num">Principle 02</div>
+        <h4>Red earns its weight</h4>
+        <p>Red is the brand accent — not a background color. It signals action (CTAs), brand (logo, labels) or key emphasis. If everything is red, nothing is. Used sparingly, it directs the eye.</p>
+      </div>
+
+      <div class="ds-principle">
+        <div class="ds-principle-num">Principle 03</div>
+        <h4>Dark for authority, light for content</h4>
+        <p>Navy sections (hero, members, footer) project institutional weight. Light sections carry editorial content (events, press, verticals). Alternation creates rhythm and makes both feel intentional.</p>
+      </div>
+
+      <div class="ds-principle">
+        <div class="ds-principle-num">Principle 04</div>
+        <h4>Motion is a whisper</h4>
+        <p>Transitions are fast (150–250ms) and use a single easing curve. No bouncing, no parallax, no carousels. Motion acknowledges interaction — it never performs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 02. COLOR ============== -->
+  <section class="ds-section">
+    <div class="ds-section-head">
+      <div class="ds-section-num">02 · Color</div>
+      <h2>Color tokens</h2>
+      <p class="ds-section-lead">A tight palette: one brand red, one institutional navy scale, a clean neutral range, and four tag colors for content verticals.</p>
+    </div>
+
+    <h3 class="ds-h3">Brand</h3>
+    <div class="ds-color-grid">
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:#E01A27"></div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Brand Red</div>
+          <div class="ds-swatch-token">--color-brand-red</div>
+          <div class="ds-swatch-hex">#E01A27</div>
+        </div>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:#B8101C"></div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Red Hover</div>
+          <div class="ds-swatch-token">--color-brand-red-hover</div>
+          <div class="ds-swatch-hex">#B8101C</div>
+        </div>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:rgba(224,26,39,.10); border:1px dashed var(--color-brand-red-border);"></div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Red Soft (10%)</div>
+          <div class="ds-swatch-token">--color-brand-red-soft</div>
+          <div class="ds-swatch-hex">#E01A27 · 10%</div>
+        </div>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:rgba(224,26,39,.25);"></div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Red Border (25%)</div>
+          <div class="ds-swatch-token">--color-brand-red-border</div>
+          <div class="ds-swatch-hex">#E01A27 · 25%</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="ds-h3">Dark surfaces (institutional)</h3>
+    <div class="ds-color-grid">
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:#0D1B35"></div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Navy (primary dark)</div>
+          <div class="ds-swatch-token">--color-surface-navy</div>
+          <div class="ds-swatch-hex">#0D1B35</div>
+        </div>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:#162040"></div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Navy 2 (elevated)</div>
+          <div class="ds-swatch-token">--color-surface-navy-2</div>
+          <div class="ds-swatch-hex">#162040</div>
+        </div>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:#131F38"></div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Card Dark</div>
+          <div class="ds-swatch-token">--color-surface-card-dark</div>
+          <div class="ds-swatch-hex">#131F38</div>
+        </div>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:#222F4A"></div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Border Dark</div>
+          <div class="ds-swatch-token">--color-border-dark</div>
+          <div class="ds-swatch-hex">#222F4A</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="ds-h3">Light surfaces (editorial)</h3>
+    <div class="ds-color-grid">
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:#F8F9FB; border-bottom:1px solid #DDE1E9;"></div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Page Background</div>
+          <div class="ds-swatch-token">--color-surface-bg</div>
+          <div class="ds-swatch-hex">#F8F9FB</div>
+        </div>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:#FFFFFF; border-bottom:1px solid #DDE1E9;"></div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Card / Panel</div>
+          <div class="ds-swatch-token">--color-surface-card</div>
+          <div class="ds-swatch-hex">#FFFFFF</div>
+        </div>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:#DDE1E9"></div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Border Light</div>
+          <div class="ds-swatch-token">--color-border-light</div>
+          <div class="ds-swatch-hex">#DDE1E9</div>
+        </div>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:#F8F9FB; display:flex; align-items:center; justify-content:center;">
+          <span style="font-family:monospace; font-size:0.7rem; color:#8A96AA;">transparent</span>
+        </div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">—</div>
+          <div class="ds-swatch-token">(intentionally blank)</div>
+          <div class="ds-swatch-hex">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="ds-h3">Text</h3>
+    <div class="ds-color-grid">
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:#111827"></div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Text Primary</div>
+          <div class="ds-swatch-token">--color-text-primary</div>
+          <div class="ds-swatch-hex">#111827</div>
+        </div>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:#6B7280"></div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Text Secondary</div>
+          <div class="ds-swatch-token">--color-text-secondary</div>
+          <div class="ds-swatch-hex">#6B7280</div>
+        </div>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:#8A96AA"></div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Text Muted (on dark)</div>
+          <div class="ds-swatch-token">--color-text-muted</div>
+          <div class="ds-swatch-hex">#8A96AA</div>
+        </div>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:#FFFFFF; border-bottom:1px solid #DDE1E9;"></div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Text White</div>
+          <div class="ds-swatch-token">--color-text-white</div>
+          <div class="ds-swatch-hex">#FFFFFF</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="ds-h3">Tag colors (press &amp; content categories)</h3>
+    <div class="ds-color-grid">
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:rgba(224,26,39,.10); display:flex; align-items:center; justify-content:center;">
+          <span class="demo-tag">Cyber</span>
+        </div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Cyber (red)</div>
+          <div class="ds-swatch-token">--tag-cyber-*</div>
+        </div>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:rgba(70,130,200,.10); display:flex; align-items:center; justify-content:center;">
+          <span class="demo-tag geo">Geopolitics</span>
+        </div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Geopolitics (blue)</div>
+          <div class="ds-swatch-token">--tag-geo-*</div>
+        </div>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:rgba(180,140,20,.10); display:flex; align-items:center; justify-content:center;">
+          <span class="demo-tag econ">Econ. Intel</span>
+        </div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Economic (gold)</div>
+          <div class="ds-swatch-token">--tag-econ-*</div>
+        </div>
+      </div>
+      <div class="ds-swatch">
+        <div class="ds-swatch-color" style="background:rgba(120,80,200,.10); display:flex; align-items:center; justify-content:center;">
+          <span class="demo-tag tech">Tech &amp; AI</span>
+        </div>
+        <div class="ds-swatch-meta">
+          <div class="ds-swatch-name">Tech (purple)</div>
+          <div class="ds-swatch-token">--tag-tech-*</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-do-dont">
+      <div class="ds-do">
+        <div class="ds-do-label">✓ Do</div>
+        <p>Use red for CTAs, brand marks, and key emphasis. Use navy for institutional sections (hero, members, footer). Use light neutrals for content-rich editorial sections.</p>
+      </div>
+      <div class="ds-dont">
+        <div class="ds-dont-label">✗ Don't</div>
+        <p>Don't stack multiple red elements in a row — it creates visual noise. Don't use tag colors outside their content vertical. Don't introduce new colors not listed here without updating the token file.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 03. TYPOGRAPHY ============== -->
+  <section class="ds-section">
+    <div class="ds-section-head">
+      <div class="ds-section-num">03 · Typography</div>
+      <h2>Type scale</h2>
+      <p class="ds-section-lead">Calibri is the brand typeface, used across the site. The scale is modular and intentional — eight sizes cover every use case in the homepage.</p>
+    </div>
+
+    <div>
+      <div class="ds-type-row">
+        <div class="ds-type-token">--font-size-4xl</div>
+        <div class="ds-type-sample" style="font-size:3.5rem; font-weight:800; letter-spacing:-0.03em;">Hero headline</div>
+        <div class="ds-type-size">56px · 800</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-token">--font-size-3xl</div>
+        <div class="ds-type-sample" style="font-size:2.5rem; font-weight:800; letter-spacing:-0.03em;">Section title</div>
+        <div class="ds-type-size">40px · 800</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-token">--font-size-2xl</div>
+        <div class="ds-type-sample" style="font-size:1.75rem; font-weight:700;">Sub-section heading</div>
+        <div class="ds-type-size">28px · 700</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-token">--font-size-xl</div>
+        <div class="ds-type-sample" style="font-size:1.375rem; font-weight:700;">Card title / small heading</div>
+        <div class="ds-type-size">22px · 700</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-token">--font-size-lg</div>
+        <div class="ds-type-sample" style="font-size:1.125rem;">Lead paragraph / press title</div>
+        <div class="ds-type-size">18px · 400</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-token">--font-size-base</div>
+        <div class="ds-type-sample" style="font-size:1rem;">Body text, paragraph content, default UI.</div>
+        <div class="ds-type-size">16px · 400</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-token">--font-size-sm</div>
+        <div class="ds-type-sample" style="font-size:0.875rem;">Small UI text, metadata, buttons, navigation.</div>
+        <div class="ds-type-size">14px · 400</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="ds-type-token">--font-size-xs</div>
+        <div class="ds-type-sample" style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.14em; font-weight:700; color:var(--color-brand-red);">Eyebrow label · tag · caption</div>
+        <div class="ds-type-size">12px · 700</div>
+      </div>
+    </div>
+
+    <div class="ds-do-dont" style="margin-top:2rem;">
+      <div class="ds-do">
+        <div class="ds-do-label">✓ Do</div>
+        <p>Use the scale as-is. Large headings (3xl, 4xl) get tight letter-spacing (-0.03em). Eyebrow labels are always uppercase with wide tracking (0.14em).</p>
+      </div>
+      <div class="ds-dont">
+        <div class="ds-dont-label">✗ Don't</div>
+        <p>Don't create intermediate sizes. Don't use Calibri italics for body text. Don't mix Calibri with other typefaces beyond the documented system fallbacks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 04. SPACING ============== -->
+  <section class="ds-section">
+    <div class="ds-section-head">
+      <div class="ds-section-num">04 · Spacing</div>
+      <h2>Spacing scale</h2>
+      <p class="ds-section-lead">A 4px-based scale. Section vertical rhythm is driven by <code style="font-family:monospace; color:var(--color-brand-red);">--space-20</code> (80px). Everything else nests inside that.</p>
+    </div>
+
+    <div class="ds-space-grid">
+      <div class="ds-space-item"><div class="ds-space-bar" style="width:4px;"></div><div class="ds-space-label">--space-1</div><div class="ds-space-px">4px</div></div>
+      <div class="ds-space-item"><div class="ds-space-bar" style="width:8px;"></div><div class="ds-space-label">--space-2</div><div class="ds-space-px">8px</div></div>
+      <div class="ds-space-item"><div class="ds-space-bar" style="width:12px;"></div><div class="ds-space-label">--space-3</div><div class="ds-space-px">12px</div></div>
+      <div class="ds-space-item"><div class="ds-space-bar" style="width:16px;"></div><div class="ds-space-label">--space-4</div><div class="ds-space-px">16px</div></div>
+      <div class="ds-space-item"><div class="ds-space-bar" style="width:24px;"></div><div class="ds-space-label">--space-6</div><div class="ds-space-px">24px</div></div>
+      <div class="ds-space-item"><div class="ds-space-bar" style="width:32px;"></div><div class="ds-space-label">--space-8</div><div class="ds-space-px">32px</div></div>
+      <div class="ds-space-item"><div class="ds-space-bar" style="width:48px;"></div><div class="ds-space-label">--space-12</div><div class="ds-space-px">48px</div></div>
+      <div class="ds-space-item"><div class="ds-space-bar" style="width:64px;"></div><div class="ds-space-label">--space-16</div><div class="ds-space-px">64px</div></div>
+      <div class="ds-space-item"><div class="ds-space-bar" style="width:80px;"></div><div class="ds-space-label">--space-20</div><div class="ds-space-px">80px</div></div>
+    </div>
+  </section>
+
+  <!-- ============== 05. ELEVATION ============== -->
+  <section class="ds-section">
+    <div class="ds-section-head">
+      <div class="ds-section-num">05 · Elevation</div>
+      <h2>Shadows</h2>
+      <p class="ds-section-lead">Five shadow levels. Use the lowest level that reads as elevated against the surface. The red glow is reserved exclusively for primary CTAs on hover.</p>
+    </div>
+
+    <div class="ds-shadow-demo">
+      <div class="ds-shadow-card xs"><div class="ds-shadow-label">--shadow-xs</div></div>
+      <div class="ds-shadow-card sm"><div class="ds-shadow-label">--shadow-sm</div></div>
+      <div class="ds-shadow-card md"><div class="ds-shadow-label">--shadow-md</div></div>
+      <div class="ds-shadow-card lg"><div class="ds-shadow-label">--shadow-lg</div></div>
+      <div class="ds-shadow-card red"><div class="ds-shadow-label" style="color:var(--color-brand-red);">--shadow-red-lg</div></div>
+    </div>
+  </section>
+
+  <!-- ============== 06. MOTION ============== -->
+  <section class="ds-section">
+    <div class="ds-section-head">
+      <div class="ds-section-num">06 · Motion</div>
+      <h2>Duration &amp; easing</h2>
+      <p class="ds-section-lead">Three durations, two easings. That's the entire motion system. Consistency matters more than variety.</p>
+    </div>
+
+    <div class="ds-motion-grid">
+      <div class="ds-motion-card">
+        <div class="ds-motion-name">--duration-fast</div>
+        <div class="ds-motion-val">150ms</div>
+        <div class="ds-motion-usage">Button hover, link color changes, toggle states.</div>
+      </div>
+      <div class="ds-motion-card">
+        <div class="ds-motion-name">--duration-base</div>
+        <div class="ds-motion-val">200ms</div>
+        <div class="ds-motion-usage">Card hover, nav underline, backgrounds, most transitions.</div>
+      </div>
+      <div class="ds-motion-card">
+        <div class="ds-motion-name">--duration-slow</div>
+        <div class="ds-motion-val">250ms</div>
+        <div class="ds-motion-usage">Larger layout shifts (card elevations, modals opening).</div>
+      </div>
+    </div>
+
+    <div class="ds-motion-grid" style="margin-top:1rem;">
+      <div class="ds-motion-card">
+        <div class="ds-motion-name">--ease-out</div>
+        <div class="ds-motion-val">cubic-bezier(0.2, 0.8, 0.2, 1)</div>
+        <div class="ds-motion-usage">Default for entering/appearing elements. Feels responsive.</div>
+      </div>
+      <div class="ds-motion-card">
+        <div class="ds-motion-name">--ease-in-out</div>
+        <div class="ds-motion-val">cubic-bezier(0.4, 0, 0.2, 1)</div>
+        <div class="ds-motion-usage">State changes where start and end are both visible (hover reversals).</div>
+      </div>
+      <div class="ds-motion-card" style="background:#FFF8E1; border-color:#F0C87A;">
+        <div class="ds-motion-name" style="color:#B8860B;">Rule</div>
+        <div class="ds-motion-val" style="color:#B8860B;">Avoid</div>
+        <div class="ds-motion-usage">No bouncing, spring, or elastic easings. No auto-scrolling carousels. No parallax.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 07. BUTTONS ============== -->
+  <section class="ds-section">
+    <div class="ds-section-head">
+      <div class="ds-section-num">07 · Components · Buttons</div>
+      <h2>Buttons</h2>
+      <p class="ds-section-lead">Three button styles. One primary per section, ghost variants for secondary actions.</p>
+    </div>
+
+    <h4 class="ds-h4">Primary · main CTAs</h4>
+    <div class="ds-example-caption">.btn-primary</div>
+    <div class="ds-example">
+      <a href="#" class="demo-btn-primary">Become a Member</a>
+      <a href="#" class="demo-btn-primary">Subscribe</a>
+      <a href="#" class="demo-btn-primary">Register now →</a>
+    </div>
+
+    <h4 class="ds-h4" style="margin-top:2rem;">Ghost (dark) · secondary actions on dark backgrounds</h4>
+    <div class="ds-example-caption">.btn-ghost · use inside .surface-dark or .surface-gradient-dark</div>
+    <div class="ds-example ds-example-dark">
+      <a href="#" class="demo-btn-ghost">Upcoming Events</a>
+      <a href="#" class="demo-btn-ghost">Members Login</a>
+    </div>
+
+    <h4 class="ds-h4" style="margin-top:2rem;">Ghost (light) · secondary actions on light backgrounds</h4>
+    <div class="ds-example-caption">.btn-ghost-light · use inside .surface-light or .surface-white</div>
+    <div class="ds-example">
+      <a href="#" class="demo-btn-ghost-light">View all events →</a>
+      <a href="#" class="demo-btn-ghost-light">View all →</a>
+    </div>
+
+    <div class="ds-do-dont">
+      <div class="ds-do">
+        <div class="ds-do-label">✓ Do</div>
+        <p>Use one primary button per section. Pair it with a ghost if a secondary action exists. Keep labels concise (2–4 words).</p>
+      </div>
+      <div class="ds-dont">
+        <div class="ds-dont-label">✗ Don't</div>
+        <p>Don't place two primary buttons adjacent — it creates competing CTAs. Don't invent new button colors or sizes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 08. LABELS & TAGS ============== -->
+  <section class="ds-section">
+    <div class="ds-section-head">
+      <div class="ds-section-num">08 · Components · Labels &amp; Tags</div>
+      <h2>Labels &amp; tags</h2>
+      <p class="ds-section-lead">Small identifiers that classify content without adding noise.</p>
+    </div>
+
+    <h4 class="ds-h4">Eyebrow label · sits above section titles</h4>
+    <div class="ds-example-caption">.label</div>
+    <div class="ds-example" style="display:block;">
+      <div style="font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--color-brand-red); font-weight:700; margin-bottom:0.5rem;">Agenda</div>
+      <div style="font-size:2.5rem; font-weight:800; letter-spacing:-0.03em;">Upcoming Events</div>
+    </div>
+
+    <h4 class="ds-h4" style="margin-top:2rem;">Press tags · one per content vertical</h4>
+    <div class="ds-example-caption">.press-tag + .tag-geo / .tag-econ / .tag-tech</div>
+    <div class="ds-example">
+      <span class="demo-tag">Cyber</span>
+      <span class="demo-tag geo">Geopolitics</span>
+      <span class="demo-tag econ">Econ. Intel</span>
+      <span class="demo-tag tech">Tech &amp; AI</span>
+    </div>
+
+    <h4 class="ds-h4" style="margin-top:2rem;">Price badge (pill) · members area</h4>
+    <div class="ds-example-caption">.price-badge</div>
+    <div class="ds-example">
+      <span class="demo-pill">CHF 150 / year</span>
+      <span class="demo-pill">Featured</span>
+    </div>
+  </section>
+
+  <!-- ============== 09. CARDS ============== -->
+  <section class="ds-section">
+    <div class="ds-section-head">
+      <div class="ds-section-num">09 · Components · Cards</div>
+      <h2>Cards</h2>
+      <p class="ds-section-lead">Three card patterns cover every content block on the homepage. Cards are structural — the grid that contains them defines the rhythm.</p>
+    </div>
+
+    <h4 class="ds-h4">Event card · light surface, image header, body</h4>
+    <div class="ds-example-caption">.card-event</div>
+    <div class="ds-example" style="padding:1.5rem;">
+      <div style="background:#fff; border:1px solid #DDE1E9; border-radius:6px; overflow:hidden; box-shadow:0 1px 3px rgba(13,27,53,.04); width:300px;">
+        <div style="height:140px; background: linear-gradient(135deg, #1e2f52, #2a1a1a); display:flex; align-items:center; justify-content:center; position:relative;">
+          <span style="position:absolute; top:0.75rem; left:0.75rem; background:var(--color-brand-red); color:#fff; font-size:0.7rem; padding:0.25rem 0.6rem; border-radius:3px; text-transform:uppercase; letter-spacing:0.08em; font-weight:700;">Cyber</span>
+          <svg width="40" height="40" fill="none" stroke="#fff" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div style="padding:1.25rem;">
+          <div style="font-size:0.75rem; color:var(--color-brand-red); font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Tue 20 May · 17:00</div>
+          <div style="font-size:1rem; font-weight:700; margin-bottom:0.5rem;">Cybersecurity &amp; Critical Infrastructure</div>
+          <div style="font-size:0.875rem; color:var(--color-text-secondary);">Expert roundtable on threats to Swiss digital infrastructure.</div>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="ds-h4" style="margin-top:2rem;">Vertical card · icon + label, fits in a grid</h4>
+    <div class="ds-example-caption">.card-vertical + .icon-tile</div>
+    <div class="ds-example" style="padding:0;">
+      <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1px; background:#DDE1E9; width:100%;">
+        <div style="background:#fff; padding:1.5rem; display:flex; align-items:center; gap:1rem;">
+          <div style="width:42px; height:42px; background:var(--color-brand-red-soft); border:1px solid var(--color-brand-red-border); border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--color-brand-red);">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <div style="font-size:0.875rem; font-weight:700;">Cybersecurity</div>
+            <div style="font-size:0.75rem; color:var(--color-text-secondary); margin-top:0.15rem;">142 articles</div>
+          </div>
+        </div>
+        <div style="background:#fff; padding:1.5rem; display:flex; align-items:center; gap:1rem;">
+          <div style="width:42px; height:42px; background:var(--color-brand-red-soft); border:1px solid var(--color-brand-red-border); border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--color-brand-red);">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12h20" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <div style="font-size:0.875rem; font-weight:700;">Geopolitics</div>
+            <div style="font-size:0.75rem; color:var(--color-text-secondary); margin-top:0.15rem;">218 articles</div>
+          </div>
+        </div>
+        <div style="background:#fff; padding:1.5rem; display:flex; align-items:center; gap:1rem;">
+          <div style="width:42px; height:42px; background:var(--color-brand-red-soft); border:1px solid var(--color-brand-red-border); border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--color-brand-red);">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" stroke-linecap="round" stroke-linejoin="round"/><polyline points="16 7 22 7 22 13" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <div style="font-size:0.875rem; font-weight:700;">Economic Intel</div>
+            <div style="font-size:0.75rem; color:var(--color-text-secondary); margin-top:0.15rem;">183 articles</div>
+          </div>
+        </div>
+        <div style="background:#fff; padding:1.5rem; display:flex; align-items:center; gap:1rem;">
+          <div style="width:42px; height:42px; background:var(--color-brand-red-soft); border:1px solid var(--color-brand-red-border); border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--color-brand-red);">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><rect width="16" height="16" x="4" y="4" rx="2" stroke-linecap="round" stroke-linejoin="round"/><rect width="6" height="6" x="9" y="9" rx="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <div style="font-size:0.875rem; font-weight:700;">Technology &amp; AI</div>
+            <div style="font-size:0.75rem; color:var(--color-text-secondary); margin-top:0.15rem;">95 articles</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="ds-h4" style="margin-top:2rem;">Resource card · private members area, dark surface</h4>
+    <div class="ds-example-caption">.card-resource · inside .panel-elevated</div>
+    <div class="ds-example ds-example-dark" style="padding:1.5rem;">
+      <div style="display:flex; align-items:center; gap:1rem; padding:0.85rem 1rem; background:rgba(255,255,255,.03); border:1px solid #222F4A; border-radius:6px; flex:1; min-width:380px;">
+        <div style="width:38px; height:38px; background:rgba(224,26,39,.1); border:1px solid var(--color-brand-red-border); border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--color-brand-red);">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div style="flex:1;">
+          <div style="color:#fff; font-weight:600; font-size:0.875rem;">Swissintell Annual Report 2025</div>
+          <div style="font-size:0.75rem; color:#8A96AA;">PDF · 28 pages · Members only</div>
+        </div>
+        <svg width="16" height="16" fill="none" stroke="#8A96AA" stroke-width="1.75" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 10. LAYOUT PATTERNS ============== -->
+  <section class="ds-section">
+    <div class="ds-section-head">
+      <div class="ds-section-num">10 · Patterns</div>
+      <h2>Layout patterns</h2>
+      <p class="ds-section-lead">How sections are composed. Every homepage section follows one of these three patterns.</p>
+    </div>
+
+    <div class="ds-principles">
+      <div class="ds-principle">
+        <div class="ds-principle-num">Pattern A</div>
+        <h4>Section header (content-centric)</h4>
+        <p>Eyebrow label (red, uppercase) → h2 title → lead paragraph. Optional "view all" link aligned right. Used in Events, Verticals, Press Review.</p>
+      </div>
+      <div class="ds-principle">
+        <div class="ds-principle-num">Pattern B</div>
+        <h4>Split section (50/50)</h4>
+        <p>Text column + visual column, 50/50 on desktop, stacked on mobile. Used in Members Area (text + resource card) and Newsletter (text + form).</p>
+      </div>
+      <div class="ds-principle">
+        <div class="ds-principle-num">Pattern C</div>
+        <h4>Hero + stats bar</h4>
+        <p>Full-width dark hero section, followed by a dark stats bar (4 metrics, dividers between). Used once, at the top of the homepage only.</p>
+      </div>
+      <div class="ds-principle">
+        <div class="ds-principle-num">Rule</div>
+        <h4>Rhythm by alternation</h4>
+        <p>Dark → Light → White → Dark → Light → Dark. Never stack two dark or two white sections in a row. This alternation creates visual rhythm.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 11. USAGE ============== -->
+  <section class="ds-section">
+    <div class="ds-section-head">
+      <div class="ds-section-num">11 · Usage</div>
+      <h2>How to use these files</h2>
+      <p class="ds-section-lead">Two CSS files. Import them in order. Build on top of the component layer — never overwrite tokens inline.</p>
+    </div>
+
+    <div style="background:#0D1B35; color:#fff; padding:1.5rem; border-radius:6px; font-family:'SF Mono','Menlo','Consolas',monospace; font-size:0.85rem; line-height:1.6; margin-bottom:1.5rem;">
+      <span style="color:#8A96AA;">/* In your WordPress theme header or main stylesheet */</span><br>
+      <span style="color:#7ab3e8;">@import</span> <span style="color:#d4b85a;">"tokens.css";</span> &nbsp;&nbsp; <span style="color:#8A96AA;">/* foundation variables */</span><br>
+      <span style="color:#7ab3e8;">@import</span> <span style="color:#d4b85a;">"components.css";</span> <span style="color:#8A96AA;">/* reusable components */</span>
+    </div>
+
+    <div class="ds-do-dont">
+      <div class="ds-do">
+        <div class="ds-do-label">✓ Do</div>
+        <p>Reference every color, size, space and shadow via its token (e.g. <code style="font-family:monospace; background:rgba(255,255,255,.5); padding:0 4px; border-radius:2px;">var(--space-8)</code>). Extend the system by adding new tokens, not overriding values.</p>
+      </div>
+      <div class="ds-dont">
+        <div class="ds-dont-label">✗ Don't</div>
+        <p>Don't hardcode hex colors or pixel values in page templates. Don't duplicate components with small variations — consolidate into the system.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="ds-footer">
+  <div class="ds-footer-inner">
+    <h3>Swissintell Design System · v1.0</h3>
+    <p>This is a living document. As the site grows, the system grows with it. Maintained by the design team.</p>
+  </div>
+</footer>
+
+</body>
+</html>

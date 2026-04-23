@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System · Usage Example</title>
+
+  <!-- Calibri (same as the mockup) -->
+  <link rel="preconnect" href="https://fonts.cdnfonts.com">
+  <link href="https://fonts.cdnfonts.com/css/calibri" rel="stylesheet">
+
+  <!-- Import order matters: tokens FIRST, components SECOND -->
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/components.css">
+
+  <style>
+    /* Example-only styles — in production these would live in page-specific files */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-family-base);
+      background: var(--color-surface-bg);
+      color: var(--color-text-primary);
+      line-height: var(--line-height-normal);
+    }
+    .demo-section { padding: var(--space-16) 0; }
+    .demo-section + .demo-section { border-top: 1px solid var(--color-border-light); }
+    .demo-title {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-extrabold);
+      margin-bottom: var(--space-6);
+      letter-spacing: var(--letter-spacing-tight);
+    }
+    .demo-row { display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center; margin-bottom: var(--space-4); }
+    .demo-caption {
+      font-family: monospace;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-3);
+    }
+
+    /* Dark context for ghost buttons demo */
+    .dark-bg {
+      background: var(--color-surface-navy);
+      padding: var(--space-6);
+      border-radius: var(--radius-base);
+    }
+
+    /* Card demo */
+    .demo-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-5);
+    }
+    .demo-card-content {
+      padding: var(--space-5);
+    }
+    .demo-card-content h3 {
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-2);
+    }
+    .demo-card-content p {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+    .demo-card-img {
+      height: 120px;
+      background: linear-gradient(135deg, #1e2f52, #2a1a1a);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <section class="demo-section">
+      <div class="section-header">
+        <div class="label">Example</div>
+        <h2 class="demo-title">Using the Swissintell design system</h2>
+        <p>This page shows how to consume tokens and components. Open the source to see exactly which classes and variables are in use.</p>
+      </div>
+    </section>
+
+    <!-- Buttons -->
+    <section class="demo-section">
+      <h3 class="demo-title">Buttons</h3>
+
+      <div class="demo-caption">Primary — for main CTAs (one per section)</div>
+      <div class="demo-row">
+        <a href="#" class="btn-primary">Become a Member</a>
+        <a href="#" class="btn-primary">Subscribe</a>
+      </div>
+
+      <div class="demo-caption" style="margin-top: 2rem;">Ghost (light) — secondary actions on light backgrounds</div>
+      <div class="demo-row">
+        <a href="#" class="btn-ghost-light">View all events →</a>
+        <a href="#" class="btn-ghost-light">Read more →</a>
+      </div>
+
+      <div class="demo-caption" style="margin-top: 2rem;">Ghost (dark) — secondary actions on dark backgrounds</div>
+      <div class="dark-bg">
+        <div class="demo-row">
+          <a href="#" class="btn-ghost">Members Login</a>
+          <a href="#" class="btn-ghost">Upcoming Events</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tags -->
+    <section class="demo-section">
+      <h3 class="demo-title">Tags</h3>
+
+      <div class="demo-caption">Press tags — one per content vertical</div>
+      <div class="demo-row">
+        <span class="press-tag">Cyber</span>
+        <span class="press-tag tag-geo">Geopolitics</span>
+        <span class="press-tag tag-econ">Econ. Intel</span>
+        <span class="press-tag tag-tech">Tech &amp; AI</span>
+      </div>
+
+      <div class="demo-caption" style="margin-top: 2rem;">Price badge (pill)</div>
+      <div class="demo-row">
+        <span class="price-badge">CHF 150 / year</span>
+      </div>
+    </section>
+
+    <!-- Event cards -->
+    <section class="demo-section">
+      <h3 class="demo-title">Event cards</h3>
+      <div class="demo-caption">.card-event — light surface, image header, body</div>
+
+      <div class="demo-card-grid">
+        <div class="card-event">
+          <div class="demo-card-img"></div>
+          <div class="demo-card-content">
+            <h3>Cybersecurity Roundtable</h3>
+            <p>Expert discussion on critical infrastructure threats.</p>
+          </div>
+        </div>
+        <div class="card-event">
+          <div class="demo-card-img"></div>
+          <div class="demo-card-content">
+            <h3>Geopolitics Update</h3>
+            <p>Briefing on regional dynamics in Central Asia.</p>
+          </div>
+        </div>
+        <div class="card-event">
+          <div class="demo-card-img"></div>
+          <div class="demo-card-content">
+            <h3>OSINT Workshop</h3>
+            <p>Hands-on session on open source intelligence tools.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section spacing note -->
+    <section class="demo-section">
+      <h3 class="demo-title">Spacing tokens in action</h3>
+      <div class="demo-caption">Every margin, padding and gap in this page uses a --space-* token. No hardcoded pixel values.</div>
+      <p style="font-size: var(--font-size-base); color: var(--color-text-secondary); max-width: 640px;">
+        The section padding above is <code style="background: var(--color-brand-red-soft); padding: 2px 6px; border-radius: 3px; color: var(--color-brand-red);">var(--space-16)</code>,
+        the demo title margin is <code style="background: var(--color-brand-red-soft); padding: 2px 6px; border-radius: 3px; color: var(--color-brand-red);">var(--space-6)</code>,
+        and the card grid gap is <code style="background: var(--color-brand-red-soft); padding: 2px 6px; border-radius: 3px; color: var(--color-brand-red);">var(--space-5)</code>.
+        Change the token once, and the entire site updates.
+      </p>
+    </section>
+
+  </div>
+
+</body>
+</html>

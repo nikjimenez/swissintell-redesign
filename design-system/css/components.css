@@ -1,0 +1,370 @@
+/* ============================================================
+   SWISSINTELL · COMPONENTS
+   Version 1.0 · April 2026
+   ----------------------------------------------------------
+   Component layer. Import AFTER tokens.css.
+   Every value here references a --token. No magic numbers.
+   ============================================================ */
+
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+/* Primary — red, filled. Use for main CTAs (one per section). */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-brand-red);
+  color: var(--color-text-white);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-base);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.04em;
+  border: none;
+  cursor: pointer;
+  transition:
+    background var(--duration-base) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+  box-shadow: var(--shadow-red-sm);
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background: var(--color-brand-red-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-red-lg);
+}
+
+/* Ghost-dark — transparent on dark backgrounds (hero, members, footer) */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: var(--border-width) solid rgba(255, 255, 255, 0.30);
+  color: var(--color-text-white);
+  background: transparent;
+  padding: 0.65rem var(--space-6);
+  border-radius: var(--radius-base);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: border-color var(--duration-base), background var(--duration-base);
+  text-decoration: none;
+}
+.btn-ghost:hover {
+  border-color: var(--color-text-white);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Ghost-light — on light backgrounds (press, events "view all") */
+.btn-ghost-light {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: var(--border-width) solid var(--color-border-light);
+  color: var(--color-text-primary);
+  background: transparent;
+  padding: 0.65rem var(--space-6);
+  border-radius: var(--radius-base);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition:
+    border-color var(--duration-base),
+    background var(--duration-base),
+    color var(--duration-base);
+  text-decoration: none;
+}
+.btn-ghost-light:hover {
+  border-color: var(--color-brand-red);
+  color: var(--color-brand-red);
+  background: var(--color-brand-red-soft);
+}
+
+
+/* ============================================================
+   LABELS & TAGS
+   ============================================================ */
+
+/* Section label — small red eyebrow above h2 */
+.label {
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--color-brand-red);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Press review tag — systematic color variants */
+.press-tag {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  padding: var(--space-1) 0.7rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: var(--font-weight-bold);
+  /* Default = Cyber */
+  background: var(--tag-cyber-bg);
+  border: var(--border-width) solid var(--tag-cyber-border);
+  color: var(--tag-cyber-text);
+}
+.press-tag.tag-geo {
+  background: var(--tag-geo-bg);
+  border-color: var(--tag-geo-border);
+  color: var(--tag-geo-text);
+}
+.press-tag.tag-econ {
+  background: var(--tag-econ-bg);
+  border-color: var(--tag-econ-border);
+  color: var(--tag-econ-text);
+}
+.press-tag.tag-tech {
+  background: var(--tag-tech-bg);
+  border-color: var(--tag-tech-border);
+  color: var(--tag-tech-text);
+}
+
+/* Price badge (pill) — members area */
+.price-badge {
+  background: var(--color-brand-red);
+  color: var(--color-text-white);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 12px rgba(224, 26, 39, 0.35);
+}
+
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+
+/* Event card — light surface, image header, body */
+.card-event {
+  background: var(--color-surface-card);
+  border: var(--border-width) solid var(--color-border-light);
+  border-radius: var(--radius-base);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  transition:
+    border-color var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out),
+    box-shadow var(--duration-slow) var(--ease-out);
+}
+.card-event:hover {
+  border-color: var(--color-brand-red-border);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Vertical card — icon + name + count, in a grid */
+.card-vertical {
+  background: var(--color-surface-card);
+  padding: 1.75rem var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  transition: background var(--duration-base);
+  cursor: pointer;
+  position: relative;
+}
+.card-vertical::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--color-brand-red);
+  transform: scaleY(0);
+  transition: transform var(--duration-base) var(--ease-out);
+  transform-origin: top;
+}
+.card-vertical:hover { background: #FEF5F5; }
+.card-vertical:hover::after { transform: scaleY(1); }
+
+/* Resource card — private area list item */
+.card-resource {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 0.85rem var(--space-4);
+  background: rgba(255, 255, 255, 0.03);
+  border: var(--border-width) solid var(--color-border-dark);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-sm);
+  transition: background var(--duration-base);
+}
+.card-resource:hover { background: rgba(255, 255, 255, 0.05); }
+
+/* Elevated panel (e.g., Members private resources card on dark section) */
+.panel-elevated {
+  background: rgba(19, 31, 56, 0.7);
+  border: var(--border-width) solid var(--color-border-dark);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow:
+    var(--shadow-xl),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+
+/* Newsletter form — pill-shaped wrapper with input + button */
+.form-newsletter {
+  display: flex;
+  gap: var(--space-2);
+  background: rgba(255, 255, 255, 0.05);
+  border: var(--border-width) solid var(--color-border-dark);
+  border-radius: var(--radius-base);
+  padding: 0.35rem;
+  transition: border-color var(--duration-base);
+}
+.form-newsletter:focus-within { border-color: var(--color-brand-red); }
+.form-newsletter input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--color-text-white);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  outline: none;
+}
+.form-newsletter input::placeholder { color: var(--color-text-muted); }
+
+
+/* ============================================================
+   ICON CONTAINERS
+   ============================================================ */
+
+/* Red-tinted icon square — used for verticals and resources */
+.icon-tile {
+  width: 44px;
+  height: 44px;
+  background: var(--color-brand-red-soft);
+  border: var(--border-width) solid var(--color-brand-red-border);
+  border-radius: var(--radius-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brand-red);
+  flex-shrink: 0;
+  transition: background var(--duration-base), transform var(--duration-base), color var(--duration-base);
+}
+.card-vertical:hover .icon-tile {
+  background: var(--color-brand-red);
+  color: var(--color-text-white);
+  transform: scale(1.05);
+}
+
+
+/* ============================================================
+   STAT BLOCK
+   ============================================================ */
+
+.stat {
+  padding: 1.75rem var(--space-8);
+  text-align: center;
+  border-right: var(--border-width) solid var(--color-border-dark);
+  transition: background var(--duration-base);
+}
+.stat:last-child { border-right: none; }
+.stat:hover { background: rgba(224, 26, 39, 0.04); }
+
+.stat-number {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.04em;
+  color: var(--color-text-white);
+  line-height: 1;
+}
+.stat-number span { color: var(--color-brand-red); }
+
+.stat-label {
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-top: var(--space-2);
+  font-weight: var(--font-weight-semibold);
+}
+
+
+/* ============================================================
+   SECTION HEADER PATTERN
+   ============================================================ */
+
+.section-header { margin-bottom: var(--space-12); }
+.section-header h2 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: var(--letter-spacing-tight);
+  margin-top: var(--space-2);
+}
+.section-header p {
+  color: var(--color-text-secondary);
+  margin-top: 0.75rem;
+  font-size: var(--font-size-base);
+}
+
+.section-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+
+/* ============================================================
+   SURFACES / SECTIONS
+   ============================================================ */
+
+.surface-light {
+  background: var(--color-surface-bg);
+  color: var(--color-text-primary);
+}
+
+.surface-white {
+  background: var(--color-surface-card);
+  color: var(--color-text-primary);
+}
+
+.surface-dark {
+  background: var(--color-surface-navy);
+  color: var(--color-text-white);
+}
+
+.surface-gradient-dark {
+  background: linear-gradient(135deg, var(--color-surface-navy) 0%, #1A0D0D 100%);
+  color: var(--color-text-white);
+}
+
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* Vertical section rhythm — apply to every <section> */
+.section-padding {
+  padding: var(--space-20) 0;
+}

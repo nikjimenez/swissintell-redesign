@@ -1,0 +1,39 @@
+Copyright (c) 2026 Swissintell Association
+All rights reserved.
+
+This repository contains proprietary design and code created for the
+Swissintell Association (swissintell.ch). All materials — including but
+not limited to HTML, CSS, documentation, reports, and visual assets —
+are the intellectual property of the Swissintell Association.
+
+NO PART of this repository may be reproduced, distributed, transmitted,
+modified, or used in any form or by any means without the express prior
+written permission of the Swissintell Association, except for:
+
+  (a) personal viewing within GitHub's web interface, and
+  (b) use explicitly authorized by the Swissintell Association
+      or its designated representatives.
+
+The repository is made public for transparency and portfolio reference
+purposes. This public visibility does NOT grant any rights to reuse,
+copy, adapt, or redistribute its contents.
+
+For licensing inquiries, partnership requests, or permission to use any
+material from this repository, please contact:
+
+  Swissintell Association
+  EPFL Innovation Park, Building I
+  CH-1015 Lausanne, Switzerland
+  info@swissintell.org
+
+----
+
+Third-party assets:
+
+  - Calibri typeface: property of Microsoft Corporation. Used via a
+    public web-font CDN. Not redistributed as a file in this repository.
+
+  - Icon designs: original SVG paths, inspired by the open-source
+    Lucide icon library (ISC License).
+
+No other third-party code is bundled in this repository.
